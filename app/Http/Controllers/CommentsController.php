@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
+use App\Models\Comments;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class CommentsController extends Controller
 {
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index() {
 
 //        $posts = Post::all();
 //        dd($posts->max());
-        return view('posts' ,[
-            'posts' => Post::paginate(3),
+        return view('reviewsysteem.comments.comments' ,[
+            'comments' => Comments::paginate(3),
         ]);
     }
 
@@ -33,7 +36,7 @@ class PostController extends Controller
             'vote' => 'required|min:1|max:5',
         ]);
 
-        $post = new Post();
+        $post = new Comments();
         $post->fill($validatedData);
         $post->save();
 

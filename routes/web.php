@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [PostController::class, 'index'])->name('home');
-Route::post('/', [PostController::class, 'post']);
+Route::get('/', [CommentsController::class, 'index'])->name('home');
+Route::post('/', [CommentsController::class, 'post']);
 
 
