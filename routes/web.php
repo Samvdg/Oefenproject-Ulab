@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\Reviewsysteem\CommentsController;
 use Illuminate\Support\Facades\Route;
 
 /*

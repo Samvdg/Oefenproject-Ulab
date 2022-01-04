@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Reviewsysteem;
 
+use App\Http\Controllers\Controller;
 use App\Models\Comments;
 use Illuminate\Http\Request;
+use function back;
+use function view;
 
 class CommentsController extends Controller
 {
