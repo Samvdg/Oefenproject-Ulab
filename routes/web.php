@@ -17,4 +17,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::any('/{x}', [Controller::class, 'routing'])->where('x', '.*');
+Route::any('{x}', [Controller::class, 'routing'])->where('x', '.*');
