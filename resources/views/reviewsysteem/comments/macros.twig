@@ -1,8 +1,0 @@
-{% macro input(name, value, type = "text", class = "", ) %}
-    <label for="{{ name }}">{{ name|capitalize }}</label>
-    <input type="{{ type }}" value="{{ value }}" name="{{ name }}" id="{{ name }}" class="{{ class }}">
-{% endmacro %}
-
-{% macro date(date) %}
-    {{ date.isoFormat("dddd D MMMM YYYY") }}
-{% endmacro %}

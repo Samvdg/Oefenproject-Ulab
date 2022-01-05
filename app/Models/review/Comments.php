@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\review;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +9,8 @@ class Comments extends Model
 {
     use HasFactory;
 
+
+    protected $table = "review.comments";
     /**
      * The attributes that are mass assignable.
      *

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Reviewsysteem;
+namespace App\Http\Controllers\review;
 
 use App\Http\Controllers\Controller;
-use App\Models\Comments;
+use App\Models\review\Comments;
 use Illuminate\Http\Request;
 use function back;
 use function view;
@@ -15,9 +15,7 @@ class CommentsController extends Controller
      */
     public function index() {
 
-//        $posts = Post::all();
-//        dd($posts->max());
-        return view('reviewsysteem.comments.comments' ,[
+        return view('review.comments.comments' ,[
             'comments' => Comments::paginate(3),
         ]);
     }

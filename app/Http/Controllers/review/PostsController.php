@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Reviewsysteem;
+namespace App\Http\Controllers\review;
 
 use App\Http\Controllers\Controller;
 

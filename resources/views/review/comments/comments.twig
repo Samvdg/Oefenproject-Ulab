@@ -1,5 +1,5 @@
-{% import "reviewsysteem.comments.macros.twig" as macro %}
-{% from "reviewsysteem.comments.macros.twig" import date %}
+{% import "review.comments.macros.twig" as macro %}
+{% from "review.comments.macros.twig" import date %}
 {% extends "base.twig" %}
 {% block styles %}
     <style>
@@ -22,32 +22,32 @@
 <div class="relative flex items-top justify-center">
     <div class="big_container">
         <div class="banner">
-            <h2>Plaats hier een reactie!</h2>
-            <span>Laat hier een berichtje achter. Onnodig kwetsende berichten of woorden zullen door de reactie verwijderd worden.</span>
-            <button style="display:block">Plaats een reactie</button>
+            <h2>{{ __("banner_title") }}</h2>
+            <span>{{ __("banner_description") }}</span>
+            <button style="display:block">{{ __("banner_button") }}</button>
 
             <div class="comment_stats" style="display:flex; justify-content: space-between">
-                <p>Aantal reacties: {{ comments.total }} </p>
-                <p>Laatste reactie: {{ date(comments.last.created_at) }}</p>
+                <p>{{ __("comment_count") }}{{ comments.total }} </p>
+                <p>{{ __("last_comment") }}{{ date(comments.last.created_at) }}</p>
             </div>
             <hr style="height:2px;border-width:0;color:gray;background-color:gray">
         </div>
 
         <div class="form">
-            <form action="{{ route("home") }}" method="post">
+            <form action="{{ route("comments") }}" method="post">
                 <div class="form-fields" style="display:flex; justify-content:center; flex-direction:column; align-items: flex-start; background-color: rgba(57,56,56,0.2);">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                    {{ macro.input("name", old("name"), "text", "input-field") }}
-                    {{ macro.input("email", old("email"), "text", "input-field") }}
-                    {{ macro.input("title", old("title"), "text", "input-field") }}
-                    {{ macro.input("description", old("description"), "text", "input-field") }}
+                    {{ macro.input(__("name"), old("name"), "text", "input-field") }}
+                    {{ macro.input(__("email"), old("email"), "text", "input-field") }}
+                    {{ macro.input(__("title"), old("title"), "text", "input-field") }}
+                    {{ macro.input(__("description"), old("description"), "text", "input-field") }}
 
-                    <label for="vote">Vote</label>
+                    <label for="vote">{{ trans('review/comments.vote') }}</label>
                     <input class="input-field" id="vote" name="vote" type="range" min="0" max="5" required value="{{ old("vote") }}">
                 </div>
 
-                <button id="submit" name="submit" type="submit">Submit comment</button>
+                <button id="submit" name="submit" type="submit">{{ __("submit_comment") }}</button>
             </form>
             <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 
@@ -70,7 +70,7 @@
                             <h3 style="color:red">{{ comment.title }}</h3>
                             <p>{{ comment.description }}</p>
                             <div style="display:flex;justify-content:space-between">
-                                <span >Vote: {{ comment.vote }}/5</span>
+                                <span >{{ trans('review/comments.vote') }} {{ comment.vote }}/5</span>
                                 <span style="font-weight:bold">{{ comment.name }} | {{ comment.created_at.isoFormat("dddd D MMMM YYYY") }}</span>
                             </div>
                             <hr style="height:2px;border-width:0;color:gray;background-color:gray">
@@ -81,7 +81,7 @@
                     </div>
                 </div>
             {% else %}
-                <p>There are no comments</p>
+                <p>{{ trans('review/comments.no_comments') }}</p>
             {% endif %}
         </div>
     </div>
