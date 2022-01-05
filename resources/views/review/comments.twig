@@ -1,5 +1,5 @@
-{% import "review.comments.macros.twig" as macro %}
-{% from "review.comments.macros.twig" import date %}
+{% import "review.macros" as macro %}
+{% from "review.macros.twig" import date %}
 {% extends "base.twig" %}
 {% block styles %}
     <style>
@@ -34,7 +34,7 @@
         </div>
 
         <div class="form">
-            <form action="{{ route("comments") }}" method="post">
+            <form action="" method="post">
                 <div class="form-fields" style="display:flex; justify-content:center; flex-direction:column; align-items: flex-start; background-color: rgba(57,56,56,0.2);">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
@@ -43,7 +43,7 @@
                     {{ macro.input(__("title"), old("title"), "text", "input-field") }}
                     {{ macro.input(__("description"), old("description"), "text", "input-field") }}
 
-                    <label for="vote">{{ trans('review/comments.vote') }}</label>
+                    <label for="vote">{{ __('vote') }}</label>
                     <input class="input-field" id="vote" name="vote" type="range" min="0" max="5" required value="{{ old("vote") }}">
                 </div>
 
@@ -70,7 +70,7 @@
                             <h3 style="color:red">{{ comment.title }}</h3>
                             <p>{{ comment.description }}</p>
                             <div style="display:flex;justify-content:space-between">
-                                <span >{{ trans('review/comments.vote') }} {{ comment.vote }}/5</span>
+                                <span >{{ __('vote') }} {{ comment.vote }}/5</span>
                                 <span style="font-weight:bold">{{ comment.name }} | {{ comment.created_at.isoFormat("dddd D MMMM YYYY") }}</span>
                             </div>
                             <hr style="height:2px;border-width:0;color:gray;background-color:gray">
@@ -81,7 +81,7 @@
                     </div>
                 </div>
             {% else %}
-                <p>{{ trans('review/comments.no_comments') }}</p>
+                <p>{{ __('no_comments') }}</p>
             {% endif %}
         </div>
     </div>
