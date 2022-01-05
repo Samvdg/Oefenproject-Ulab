@@ -1,6 +1,6 @@
 {% macro input(name, value, type = "text", class = "", ) %}
-    <label for="{{ name|lower }}">{{ name|capitalize }}</label>
-    <input type="{{ type }}" value="{{ value }}" name="{{ name|lower }}" id="{{ name|lower }}" class="{{ class }}">
+    <label for="{{ name|lower }}">{{ __(name)|capitalize }}</label>
+    <input id="{{ name|lower }}" name="{{ name|lower }}" value="{{ value }}" type="{{ type }}" class="{{ class }}" required>
 {% endmacro %}
 
 {% macro date(date) %}
