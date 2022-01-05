@@ -2,3 +2,83 @@
 {% import "macros" as mac %}
 
 
+{% block styles %}
+    <style>
+        .body {
+            margin: auto;
+            width: 75%;
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .input-field {
+            border: 1px solid #6b7280; border-radius: 5px;
+        }
+
+        .topic {
+            width: 100px;
+            display: flex;
+            border: 1px solid black;
+            margin: 10px 10px;
+            justify-content: space-evenly;
+        }
+        .topics {
+            display: flex;
+            justify-content: space-around;
+            align-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="form_container">
+        <form class="form" action="" method="post">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            {{ mac.input("name", old("name"), "text", "input-field") }}
+            <button id="submit" value="submit" type="submit">submit</button>
+        </form>
+    </div>
+
+    {% if errors.any %}
+        <hr style="height:2px;border-width:0;color:red;background-color:red">
+        <div class="alert alert-danger">
+            <h3 style="color:red">Errors:</h3>
+            <ul>
+                {% for error in errors.all %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if topics.total > 0 %}
+        <div class="topics">
+            {% for topic in topics %}
+                <div class="topic">
+                    <p class="topic_name">{{ topic.name }}</p>
+
+                    <div class="actions">
+                        <form action="{{ app.request.uri }}/{{ topic.id }}" method="get"><button type="submit" value="submit">show</button> </form>
+                        <form action="{{ app.request.uri }}/{{ topic.id }}/edit" method="get"><button type="submit" value="submit">edit</button></form>
+{#                        <form action="{{ app.request.uri }}/{{ topic.id }}/edit"><button type="submit" value="submit">delete</button></form>#}
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="d-flex justify-content-center">
+                {{  topics.links }}
+            </div>
+        </div>
+
+    {% else %}
+        <div class="no_topic">
+            <p>{{ __('no_topics') }}</p>
+        </div>
+    {% endif %}
+
+{% endblock %}

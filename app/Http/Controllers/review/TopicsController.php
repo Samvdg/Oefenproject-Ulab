@@ -13,7 +13,9 @@ class TopicsController extends Controller
      */
     public function index()
     {
-        return view('review.topics');
+        return view('review.topics', [
+            "topics" => Topics::paginate(3),
+        ]);
     }
 
     /**
@@ -80,9 +82,14 @@ class TopicsController extends Controller
             "name" => "required",
         ]);
 
-//        dd($validatedData);
-
-//        $topic = Topics::where('id',$id)->update(['name' => $])
+        try
+        {
+            Topics::where('id',$id)->update(['name' => $validatedData["name"]]);
+        }
+        catch (\Exception $e)
+        {
+            dd($e);
+        }
     }
 
     /**
@@ -92,6 +99,10 @@ class TopicsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Topics::where('id', $id)->delete();
+        } catch (\Exception $e) {
+            dd($e);
+        }
     }
 }

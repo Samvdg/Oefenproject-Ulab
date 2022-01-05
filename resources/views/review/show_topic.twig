@@ -1,4 +1,11 @@
 {% extends "base" %}
 {% import "macros" as mac %}
 
-
+{% block body %}
+    {% if topic %}
+        <h1>{{ __("name") }}</h1>
+        <input id="name" value="{{ topic.name }}" name="name" {%  if edit == false %} disabled {% endif %}/>
+    {% else %}
+        <h1>Something went wrong...</h1>
+    {% endif %}
+{% endblock %}

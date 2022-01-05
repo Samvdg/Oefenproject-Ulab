@@ -39,7 +39,7 @@ class Controller extends BaseController
                 // maybe check if $seg[3] exists in the given controller?
                 elseif (count($seg) > 3)
                 {
-                   return $controller->$seg[3]($seg[2]);
+                   return $controller->{$seg[3]}($seg[2]);
                 }
                 break;
 

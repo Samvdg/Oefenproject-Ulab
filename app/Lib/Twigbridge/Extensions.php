@@ -28,7 +28,8 @@ class Extensions extends AbstractExtension
      */
     private function transformer($key)
     {
-        return trans(request()->path().".$key");
+        $req = implode('/',array_slice(request()->segments(),0,2));
+        return trans("$req.$key");
     }
 
 }

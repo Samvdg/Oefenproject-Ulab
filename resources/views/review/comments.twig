@@ -47,7 +47,7 @@
                     <input class="input-field" id="vote" name="vote" type="range" min="0" max="5" required value="{{ old("vote") }}">
                 </div>
 
-                <button id="submit" name="submit" type="submit">{{ __("submit_comment") }}</button>
+                <button id="submit" name="submit" type="submit" value="submit">{{ __("submit_comment") }}</button>
             </form>
 
             {% if errors.any %}
