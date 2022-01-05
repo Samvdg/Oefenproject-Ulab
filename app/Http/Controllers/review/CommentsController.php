@@ -39,9 +39,9 @@ class CommentsController extends Controller
             "vote" => "required|min:1|max:5",
         ]);
 
-        $post = new Comments();
-        $post->fill($validatedData);
-        $post->save();
+        $comment = new Comments();
+        $comment->fill($validatedData);
+        $comment->save();
 
         return back();
     }
