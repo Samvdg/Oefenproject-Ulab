@@ -41,7 +41,7 @@
                 </div>
             {% endif %}
 
-            <form action="{{ replace(app.request.uri, '(/topics/.)') }}/comments/?topic={{ topic.id }}"><button type="submit" value="submite">Place a comment</button></form>
+            <form action="{{ replace(app.request.uri, '(/topics/.)') }}/comments/?topic={{ topic.id }}"><button type="submit" value="submit">Place a comment</button></form>
 
         </div>
     {% else %}
