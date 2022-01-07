@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 
-class Controller extends BaseController
+class RoutingController extends BaseController
 {
-    public function routing($uri, Request $request)
+    public function dynamic($uri, Request $request)
     {
         $controller = '\App\Http\Controllers\\';
         $seg = request()->segments();

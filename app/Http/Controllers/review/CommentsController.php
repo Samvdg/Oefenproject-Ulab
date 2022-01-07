@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\review;
 
-use App\Http\Controllers\Controller;
 use App\Models\review\Comments;
 use App\Models\review\Topics;
 use Illuminate\Http\Request;
@@ -11,7 +10,7 @@ use PhpParser\Comment;
 use function back;
 use function view;
 
-class CommentsController extends Controller
+class CommentsController
 {
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View

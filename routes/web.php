@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\RoutingController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +18,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function(){ return redirect('/review/topics'); });
 
 // Dynamic routing
-Route::any('{x}', [Controller::class, 'routing'])->where('x', '.*');
+Route::any('{x}', [RoutingController::class, 'dynamic'])->where('x', '.*');

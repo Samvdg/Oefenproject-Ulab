@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\review;
 
-use App\Http\Controllers\Controller;
-use App\Models\review\Comments;
 use App\Models\review\Topics;
 use Illuminate\Http\Request;
 
-class TopicsController extends Controller
+class TopicsController
 {
     /**
      * Display a listing of the resource.
