@@ -1,10 +1,44 @@
 {% extends "base" %}
 {% import "macros" as mac %}
 
+{% block styles %}
+    <style>
+        .actions {
+            display: flex;
+            /*justify-content: space-evenly;*/
+            flex-direction: row;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     {% if topic %}
-        <h1>{{ __("name") }}</h1>
-        <input id="name" value="{{ topic.name }}" name="name" {%  if edit == false %} disabled {% endif %}/>
+        <div>
+            <label for="name"> <h1>{{ __("name") }}</h1> </label>
+            {% if edit == true %}
+                <form action="{{ app.request.uri|trim('/edit', 'right') }}/update" method="post">
+                    <input id="name" placeholder="{{ topic.name }}" name="name" class="input-field" />
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    <button type="submit" value="submit">update</button>
+                </form>
+                <div class="actions">
+                    <form action="{{  app.request.uri|trim('/edit', 'right') }}" method="get"><button type="submit" value="submit">show</button> </form>
+                    <form action="{{ app.request.uri|trim('/edit', 'right') }}" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        <button type="submit" value="submit">delete</button>
+                    </form>
+                </div>
+            {% else %}
+                <input id="name" value="{{ topic.name }}" name="name" class="input-field"  disabled />
+                <div class="actions">
+                    <form action="{{  app.request.uri }}/edit" method="get"><button type="submit" value="submit">edit</button></form>
+                    <form action="{{ app.request.uri }}" method="post">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        <button type="submit" value="submit">delete</button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
     {% else %}
         <h1>Something went wrong...</h1>
     {% endif %}

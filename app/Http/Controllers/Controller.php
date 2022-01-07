@@ -16,6 +16,7 @@ class Controller extends BaseController
         $seg = request()->segments();
         $controller .= ucfirst($seg[0]) . '\\' . ucfirst($seg[1]) . 'Controller';
         $controller = new $controller;
+//        dd($seg);
 
 
         // TODO: Make a switch case for all methods
@@ -32,14 +33,14 @@ class Controller extends BaseController
                 // in case of 3 segments, the 3rd segment will be the id of an object
                 elseif (count($seg) == 3)
                 {
-                   return $controller->show($seg[2]);
+                    return $controller->show($seg[2]);
                 }
 
                 // incase of more segments, 4 to be exact, it will be edit or a different function defined in a controller
                 // maybe check if $seg[3] exists in the given controller?
                 elseif (count($seg) > 3)
                 {
-                   return $controller->{$seg[3]}($seg[2]);
+                    return $controller->{$seg[3]}($seg[2]);
                 }
                 break;
 
@@ -49,10 +50,16 @@ class Controller extends BaseController
                     return $controller->store($request);
                 }
 
+                // Post with 3 items most likely means a delete
+                elseif (count($seg) == 3)
+                {
+                    return $controller->destroy($seg[2]);
+                }
+
                 // i dont think there is going to be urls like this but just incase there is a custom function with a post
                 elseif (count($seg) > 3)
                 {
-                    return $controller->$seg[3](request(), $seg[2]);
+                    return $controller->{$seg[3]}(request(),$seg[2]);
                 }
                 // if there are 3 segments, it is a get for a controller action
 

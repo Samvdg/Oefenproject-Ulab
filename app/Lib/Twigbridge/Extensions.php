@@ -13,7 +13,6 @@ class Extensions extends AbstractExtension
     {
         return [
             new TwigFunction('__', function($key) {return $this->transformer($key);}),
-
         ];
     }
 

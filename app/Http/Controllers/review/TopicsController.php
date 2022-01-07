@@ -14,16 +14,8 @@ class TopicsController extends Controller
     public function index()
     {
         return view('review.topics', [
-            "topics" => Topics::paginate(3),
+            "topics" => Topics::paginate(25),
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -52,7 +44,7 @@ class TopicsController extends Controller
     public function show($id)
     {
         return view('review.show_topic', [
-            'topic' => Topics::where('id', $id)->get(),
+            'topic' => Topics::findOrFail($id),
             'edit' => false,
         ]);
     }
@@ -65,7 +57,7 @@ class TopicsController extends Controller
     public function edit($id)
     {
         return view('review.show_topic', [
-            'topic' => Topics::where('id', $id)->get(),
+            'topic' => Topics::findOrFail($id),
             'edit' => true,
         ]);
     }
@@ -85,6 +77,7 @@ class TopicsController extends Controller
         try
         {
             Topics::where('id',$id)->update(['name' => $validatedData["name"]]);
+            return back();
         }
         catch (\Exception $e)
         {
@@ -100,7 +93,9 @@ class TopicsController extends Controller
     public function destroy($id)
     {
         try {
+//            dd($id);
             Topics::where('id', $id)->delete();
+            return back();
         } catch (\Exception $e) {
             dd($e);
         }

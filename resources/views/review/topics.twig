@@ -20,11 +20,11 @@
         }
 
         .topic {
-            width: 100px;
+            padding: 1em;
             display: flex;
+            justify-content: space-between;
             border: 1px solid black;
             margin: 10px 10px;
-            justify-content: space-evenly;
         }
         .topics {
             display: flex;
@@ -66,7 +66,10 @@
                     <div class="actions">
                         <form action="{{ app.request.uri }}/{{ topic.id }}" method="get"><button type="submit" value="submit">show</button> </form>
                         <form action="{{ app.request.uri }}/{{ topic.id }}/edit" method="get"><button type="submit" value="submit">edit</button></form>
-{#                        <form action="{{ app.request.uri }}/{{ topic.id }}/edit"><button type="submit" value="submit">delete</button></form>#}
+                        <form action="{{ app.request.uri }}/{{ topic.id }}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                            <button type="submit" value="submit">delete</button>
+                        </form>
                     </div>
                 </div>
             {% endfor %}
