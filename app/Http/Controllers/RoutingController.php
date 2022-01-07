@@ -13,15 +13,12 @@ class RoutingController extends BaseController
         $seg = request()->segments();
         $controller .= ucfirst($seg[0]) . '\\' . ucfirst($seg[1]) . 'Controller';
         $controller = new $controller;
-//        dd($seg);
 
 
-        // TODO: Make a switch case for all methods
         switch (request()->method())
         {
             case 'GET':
 
-                // This can probably be simplified?
                 // if there are only 2 segments on a get, it's the index.
                 if (count($seg) < 3){
                     return $controller->index();
@@ -34,7 +31,6 @@ class RoutingController extends BaseController
                 }
 
                 // incase of more segments, 4 to be exact, it will be edit or a different function defined in a controller
-                // maybe check if $seg[3] exists in the given controller?
                 elseif (count($seg) > 3)
                 {
                     if ($seg[3] == "back") {
@@ -56,7 +52,7 @@ class RoutingController extends BaseController
                     return $controller->destroy($seg[2]);
                 }
 
-                // i dont think there is going to be urls like this but just incase there is a custom function with a post
+                // Incase of more than 3 segments, there is most likely a custom function in the controller
                 elseif (count($seg) > 3)
                 {
                     return $controller->{$seg[3]}(request(),$seg[2]);
@@ -70,9 +66,5 @@ class RoutingController extends BaseController
                 break;
 
         }
-
-        // todo add 404 error handling
-        // todo : let comments load out based on the chosen topic. When wanting to go back from the comments, redirect to the topic page.
-
     }
 }

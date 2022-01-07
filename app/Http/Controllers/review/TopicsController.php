@@ -42,7 +42,6 @@ class TopicsController
      */
     public function show($id)
     {
-//        dd(Topics::findOrFail($id)->comments);
         return redirect("review/comments?topic_id=$id");
     }
 
@@ -71,15 +70,8 @@ class TopicsController
             "name" => "required",
         ]);
 
-        try
-        {
-            Topics::where('id',$id)->update(['name' => $validatedData["name"]]);
-            return redirect('review/topics');
-        }
-        catch (\Exception $e)
-        {
-            dd($e);
-        }
+        Topics::where('id',$id)->update(['name' => $validatedData["name"]]);
+        return redirect('review/topics');
     }
 
     /**
@@ -89,11 +81,7 @@ class TopicsController
      */
     public function destroy($id)
     {
-        try {
-            Topics::where('id', $id)->delete();
-            return redirect('review/topics');
-        } catch (\Exception $e) {
-            dd($e);
-        }
+        Topics::where('id', $id)->delete();
+        return redirect('review/topics');
     }
 }

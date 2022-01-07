@@ -5,8 +5,6 @@ namespace App\Http\Controllers\review;
 use App\Models\review\Comments;
 use App\Models\review\Topics;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use PhpParser\Comment;
 use function back;
 use function view;
 
@@ -19,7 +17,6 @@ class CommentsController
 
         $topic = Topics::findOrFail(request("topic_id"), ['id', 'name']);
         $comments = Comments::where('topic_id', $topic->id)->paginate(3);
-//        dd($comments);
         return view("review.comments" ,[
             "comments" => $comments,
             "topic" => $topic,
@@ -60,15 +57,5 @@ class CommentsController
         ]);
 
     }
-
-//    public function edit($id)
-//    {
-//
-//    }
-//
-//    public function delete($id)
-//    {
-//
-//    }
 
 }

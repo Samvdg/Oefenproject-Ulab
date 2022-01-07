@@ -35,7 +35,7 @@ class Extensions extends AbstractExtension
 
     private function replace($string, $regex, $replacement = '')
     {
-        return preg_replace($regex, '', $string);
+        return preg_replace($regex, $replacement, $string);
     }
 
 }
