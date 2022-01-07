@@ -17,7 +17,7 @@
             <label for="name"> <h1>{{ __("name") }}</h1> </label>
             {% if edit == true %}
                 <form action="{{ app.request.uri|trim('/edit', 'right') }}/update" method="post">
-                    <input id="name" placeholder="{{ topic.name }}" name="name" class="input-field" />
+                    <input id="name" value="{{ topic.name }}" name="name" class="input-field" />
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <button type="submit" value="submit">update</button>
                 </form>
@@ -27,6 +27,7 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <button type="submit" value="submit">delete</button>
                     </form>
+                    <form action="{{  app.request.uri|trim('/edit', 'right') }}/back" method="get"><button type="submit" value="submit">back</button></form>
                 </div>
             {% else %}
                 <input id="name" value="{{ topic.name }}" name="name" class="input-field"  disabled />
@@ -36,8 +37,12 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                         <button type="submit" value="submit">delete</button>
                     </form>
+                    <form action="{{  app.request.uri }}/back" method="get"><button type="submit" value="submit">back</button></form>
                 </div>
             {% endif %}
+
+            <form action="{{ replace(app.request.uri, '(/topics/.)') }}/comments/?topic={{ topic.id }}"><button type="submit" value="submite">Place a comment</button></form>
+
         </div>
     {% else %}
         <h1>Something went wrong...</h1>

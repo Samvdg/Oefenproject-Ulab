@@ -77,7 +77,7 @@ class TopicsController extends Controller
         try
         {
             Topics::where('id',$id)->update(['name' => $validatedData["name"]]);
-            return back();
+            return redirect('review/topics');
         }
         catch (\Exception $e)
         {
@@ -93,9 +93,8 @@ class TopicsController extends Controller
     public function destroy($id)
     {
         try {
-//            dd($id);
             Topics::where('id', $id)->delete();
-            return back();
+            return redirect('review/topics');
         } catch (\Exception $e) {
             dd($e);
         }

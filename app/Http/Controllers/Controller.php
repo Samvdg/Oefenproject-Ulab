@@ -40,6 +40,9 @@ class Controller extends BaseController
                 // maybe check if $seg[3] exists in the given controller?
                 elseif (count($seg) > 3)
                 {
+                    if ($seg[3] == "back") {
+                        return redirect("$seg[0]/$seg[1]");
+                    }
                     return $controller->{$seg[3]}($seg[2]);
                 }
                 break;
@@ -70,6 +73,9 @@ class Controller extends BaseController
                 break;
 
         }
+
+        // todo add 404 error handling
+        // todo : let comments load out based on the chosen topic. When wanting to go back from the comments, redirect to the topic page.
 
     }
 }

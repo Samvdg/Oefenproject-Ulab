@@ -13,6 +13,8 @@ class Extensions extends AbstractExtension
     {
         return [
             new TwigFunction('__', function($key) {return $this->transformer($key);}),
+            new TwigFunction('replace', function($string, $regex, $replacement = '') {return $this->replace($string, $regex, $replacement = '');}),
+
         ];
     }
 
@@ -29,6 +31,11 @@ class Extensions extends AbstractExtension
     {
         $req = implode('/',array_slice(request()->segments(),0,2));
         return trans("$req.$key");
+    }
+
+    private function replace($string, $regex, $replacement = '')
+    {
+        return preg_replace($regex, '', $string);
     }
 
 }
