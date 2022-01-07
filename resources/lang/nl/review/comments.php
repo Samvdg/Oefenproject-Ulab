@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'banner_title' => "Plaats hier een reactie!",
+    'banner_title' => "Plaats hier een reactie",
     'banner_description' => 'Laat hier een berichtje achter. Onnodig kwetsende berichten of woorden zullen door de reactie verwijderd worden.',
     'banner_button' => 'Plaats een reactie',
     'comment_count' => 'Aantal reacties: ',

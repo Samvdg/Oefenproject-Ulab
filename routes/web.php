@@ -1,9 +1,6 @@
 <?php
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\review\CommentsController;
-use App\Http\Controllers\review\PostsController;
-use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Home route. Redirects to the topics index page with proper URI
+Route::get('/', function(){ return redirect('/review/topics'); });
+
+// Dynamic routing
 Route::any('{x}', [Controller::class, 'routing'])->where('x', '.*');

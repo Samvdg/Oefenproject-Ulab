@@ -19,74 +19,76 @@
     </style>
 {% endblock %}
 {% block body %}
-<div class="relative flex items-top justify-center">
-    <div class="big_container">
-        <div class="banner">
-            <h2>{{ __("banner_title") }}</h2>
-            <span>{{ __("banner_description") }}</span>
-            <button style="display:block">{{ __("banner_button") }}</button>
+    <div class="relative flex items-top justify-center">
+        <div class="big_container">
+            <div class="banner">
+                <a href="/review/topics"><button>Terug naar topic overzicht</button></a>
+                <h2>{{ __("banner_title") }} over {{ topic.name }}</h2>
+                <span>{{ __("banner_description") }}</span>
+                <button style="display:block">{{ __("banner_button") }}</button>
 
-            <div class="comment_stats" style="display:flex; justify-content: space-between">
-                <p>{{ __("comment_count") }}{{ comments.total }} </p>
-                <p>{{ __("last_comment") }}{{ date(comments.last.created_at) }}</p>
+                <div class="comment_stats" style="display:flex; justify-content: space-between">
+                    <p>{{ __("comment_count") }}{{ comments.total }} </p>
+                    <p>{{ __("last_comment") }}{{ date(comments.last.created_at) }}</p>
+                </div>
+                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
             </div>
-            <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-        </div>
 
-        <div class="form">
-            <form action="" method="post">
-                <div class="form-fields" style="display:flex; justify-content:center; flex-direction:column; align-items: flex-start; background-color: rgba(57,56,56,0.2);">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <div class="form">
+                <form action="" method="post">
+                    <div class="form-fields" style="display:flex; justify-content:center; flex-direction:column; align-items: flex-start; background-color: rgba(57,56,56,0.2);">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
 
-                    {{ macro.input( "name", old("name"), "text", "input-field") }}
-                    {{ macro.input( "email", old("email"), "text", "input-field") }}
-                    {{ macro.input( "title", old("title"), "text", "input-field") }}
-                    {{ macro.input( "description", old("description"), "text", "input-field") }}
+                        {{ macro.input( "name", old("name"), "text", "input-field") }}
+                        {{ macro.input( "email", old("email"), "text", "input-field") }}
+                        {{ macro.input( "title", old("title"), "text", "input-field") }}
+                        {{ macro.input( "description", old("description"), "text", "input-field") }}
 
-                    <label for="vote">{{ __('vote') }}</label>
-                    <input class="input-field" id="vote" name="vote" type="range" min="0" max="5" required value="{{ old("vote") }}">
-                </div>
-
-                <button id="submit" name="submit" type="submit" value="submit">{{ __("submit_comment") }}</button>
-            </form>
-
-            {% if errors.any %}
-                <hr style="height:2px;border-width:0;color:red;background-color:red">
-                <div class="alert alert-danger">
-                    <h3 style="color:red">Errors:</h3>
-                    <ul>
-                        {% for error in errors.all %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            {% endif %}
-
-            <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-
-
-            {% if comments.total > 0 %}
-                <div class="comments">
-                    {% for comment in comments %}
-                        <div class="comment">
-                            <h3 style="color:red">{{ comment.title }}</h3>
-                            <p>{{ comment.description }}</p>
-                            <div style="display:flex;justify-content:space-between">
-                                <span >{{ __('vote') }} {{ comment.vote }}/5</span>
-                                {# TODO: make a show and edit button #}
-                                <span style="font-weight:bold">{{ comment.name }} | {{ comment.created_at.isoFormat("dddd D MMMM YYYY") }}</span>
-                            </div>
-                            <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-                        </div>
-                    {% endfor %}
-                    <div class="d-flex justify-content-center">
-                        {{  comments.links }}
+                        <label for="vote">{{ __('vote') }}</label>
+                        <input class="input-field" id="vote" name="vote" type="range" min="0" max="5" required value="{{ old("vote") }}">
+{#                        <input type="hidden" name="topic_id" value="{{ topic.id }}" />#}
                     </div>
-                </div>
-            {% else %}
-                <p>{{ __('no_comments') }}</p>
-            {% endif %}
+
+                    <button id="submit" name="submit" type="submit" value="submit">{{ __("submit_comment") }}</button>
+                </form>
+
+                {% if errors.any %}
+                    <hr style="height:2px;border-width:0;color:red;background-color:red">
+                    <div class="alert alert-danger">
+                        <h3 style="color:red">Errors:</h3>
+                        <ul>
+                            {% for error in errors.all %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+
+                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+
+
+                {% if comments.total > 0 %}
+                    <div class="comments">
+                        {% for comment in comments %}
+                            <div class="comment">
+                                <h3 style="color:red">{{ comment.title }}</h3>
+                                <p>{{ comment.description }}</p>
+                                <div style="display:flex;justify-content:space-between">
+                                    <span >{{ __('vote') }} {{ comment.vote }}/5</span>
+                                    {# TODO: make a show and edit button #}
+                                    <span style="font-weight:bold">{{ comment.name }} | {{ comment.created_at.isoFormat("dddd D MMMM YYYY") }}</span>
+                                </div>
+                                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                            </div>
+                        {% endfor %}
+                        <div class="d-flex justify-content-center">
+                            {{  comments.links }}
+                        </div>
+                    </div>
+                {% else %}
+                    <p>{{ __('no_comments') }}</p>
+                {% endif %}
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}

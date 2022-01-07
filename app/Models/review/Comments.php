@@ -22,6 +22,7 @@ class Comments extends Model
         'title',
         'description',
         'vote',
+        'topic_id',
     ];
 
     /**
@@ -33,4 +34,5 @@ class Comments extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
 }

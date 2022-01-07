@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\review;
 
 use App\Http\Controllers\Controller;
+use App\Models\review\Comments;
 use App\Models\review\Topics;
 use Illuminate\Http\Request;
 
@@ -43,10 +44,8 @@ class TopicsController extends Controller
      */
     public function show($id)
     {
-        return view('review.show_topic', [
-            'topic' => Topics::findOrFail($id),
-            'edit' => false,
-        ]);
+//        dd(Topics::findOrFail($id)->comments);
+        return redirect("review/comments?topic_id=$id");
     }
 
     /**

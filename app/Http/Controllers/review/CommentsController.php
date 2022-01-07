@@ -4,8 +4,10 @@ namespace App\Http\Controllers\review;
 
 use App\Http\Controllers\Controller;
 use App\Models\review\Comments;
+use App\Models\review\Topics;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use PhpParser\Comment;
 use function back;
 use function view;
 
@@ -16,8 +18,12 @@ class CommentsController extends Controller
      */
     public function index() {
 
+        $topic = Topics::findOrFail(request("topic_id"), ['id', 'name']);
+        $comments = Comments::where('topic_id', $topic->id)->paginate(3);
+//        dd($comments);
         return view("review.comments" ,[
-            "comments" => Comments::paginate(3),
+            "comments" => $comments,
+            "topic" => $topic,
         ]);
     }
 
@@ -36,7 +42,8 @@ class CommentsController extends Controller
             "email" => "required|email|max:100",
             "title" => "required|max:100|min:5",
             "description" => "required|min:1|max:100",
-            "vote" => "required|min:1|max:5",
+            "vote" => "required|integer|min:1|max:5",
+            "topic_id" => "required|integer",
         ]);
 
         $comment = new Comments();

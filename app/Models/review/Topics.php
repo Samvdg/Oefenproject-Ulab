@@ -31,4 +31,9 @@ class Topics extends Model
         'updated_at' => 'datetime',
         'deleted_at' => 'datetime',
     ];
+
+    public function comments()
+    {
+        return $this->hasMany(Comments::class, 'topic_id');
+    }
 }
