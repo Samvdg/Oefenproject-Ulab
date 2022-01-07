@@ -60,11 +60,8 @@ class RoutingController extends BaseController
                 // if there are 3 segments, it is a get for a controller action
 
                 break;
-
-            default:
-                echo "No clue where ur goin but it aint the right way";
-                break;
-
         }
+
+        return  "No clue where ur goin but it aint the right way";
     }
 }
