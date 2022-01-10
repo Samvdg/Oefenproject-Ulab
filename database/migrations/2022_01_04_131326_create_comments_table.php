@@ -20,7 +20,8 @@ class CreateCommentsTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->integer('vote');
-            $table->foreignId('topic_id')->constrained('users');
+            $table->foreignId('topic_id')->constrained('review.topics');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
         });
     }
