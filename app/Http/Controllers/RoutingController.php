@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 class RoutingController extends BaseController
 {
-    public function dynamic($uri, Request $request)
+    public function dynamic(Request $request)
     {
         // Start of the controller location string and get the request segments
         $controller = '\App\Http\Controllers\\';
@@ -30,8 +30,10 @@ class RoutingController extends BaseController
                 if (count($seg) < 3) return $controller->index();
 
                 // in case of 3 segments, the 3rd segment will be the id of an object
-                elseif (count($seg) == 3) return function_exists($controller->show()) ? $controller->show($seg[2]) :  abort(404);
-
+                elseif (count($seg) == 3) {
+                    if(method_exists($controller, 'show')) return $controller->show($seg[2]);
+                    else abort(404, 'Method "show" does not exist in given class');
+                }
 
                 // incase of more segments, 4 to be exact, it will be edit or a different function defined in a controller
                 elseif (count($seg) > 3)
@@ -56,8 +58,6 @@ class RoutingController extends BaseController
 
                 // Very hard to get to 404
                 else abort(404);
-
-                break;
         }
 
         return  abort(404);
