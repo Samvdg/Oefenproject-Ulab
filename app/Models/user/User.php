@@ -11,6 +11,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    // TODO research boot function of laravel models
+    // TODO add user authorization on multiple fields
     /**
      * The attributes that are mass assignable.
      *
@@ -18,6 +20,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
     ];
