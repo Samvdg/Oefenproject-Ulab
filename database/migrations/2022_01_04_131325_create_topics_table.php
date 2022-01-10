@@ -16,6 +16,7 @@ class CreateTopicsTable extends Migration
         Schema::create('review.topics', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreignId('user_id')->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });
