@@ -13,6 +13,7 @@ class Extensions extends AbstractExtension
     {
         return [
             new TwigFunction('__', function($key) {return $this->transformer($key);}),
+            new TwigFunction('___', function($key) {return $this->transformer($key, true);}),
             new TwigFunction('replace', function($string, $regex, $replacement = '') {return $this->replace($string, $regex, $replacement = '');}),
 
         ];
@@ -27,10 +28,14 @@ class Extensions extends AbstractExtension
      * Because of this, to get the correct translation, we combine the route and the key of the word/sentence that needs to be translated
      *
      */
-    private function transformer($key)
+    private function transformer($key, $base = false)
     {
-        $req = implode('/',array_slice(request()->segments(),0,2));
-        return trans("$req.$key");
+        if(!$base) {
+            $req = implode('/',array_slice(request()->segments(),0,2));
+            return trans("$req.$key");
+        } else {
+            return trans("base.$key");
+        }
     }
 
     private function replace($string, $regex, $replacement = '')

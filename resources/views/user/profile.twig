@@ -1,7 +1,58 @@
 {% extends "base" %}
+{% import "macros" as macros %}
+
+{% block styles %}
+    <style>
+        .info-box {
+            border: 1px solid;
+            margin: 15px 10px;
+            padding: 5px;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
 
+    <h1>{{ __('welcome') }} {{ user.name|capitalize }}</h1>
 
+    <div class="info-box NAW">
+        <h3>{{ __('naw_info') }}</h3>
+        <ul class="info-list">
+            <li>{{ __('name') }} {{ user.name }}</li>
+            <li>{{ __('username') }} {{ user.username }}</li>
+            <li>{{ __('email') }} {{ user.email }}</li>
+            <li>{{ __('created_at') }} {{ user.created_at }}</li>
+            <li>{{ __('last_updated_at') }} {{ user.updated_at }}</li>
+        </ul>
+    </div>
+
+    <div class="info-box topics">
+        <h3>{{ __('topics_info') }}</h3>
+        <ul class="info-list topics">
+            {% if topics.total > 0 %}
+            {% for comment in topics %}
+                <li>{{ topic.name }}</li>
+                <li>{{ __('placed_at') }} {{ macros.date(topic.created_at) }}</li>
+            {% endfor %}
+            {% else %}
+        </ul>
+        <p>{{ __('no_topics') }}</p>
+        {% endif %}
+    </div>
+
+    <div class="info-box comments">
+        <h3>{{ __('comments_info') }}</h3>
+        <ul class="info-list comments">
+            {% if comments.total > 0 %}
+            {% for comment in comments %}
+                <li>{{ comment.title }}</li>
+                <li>{{ comment.topic_id }}</li>
+                <li>{{ __('placed_at') }} {{ macros.date(comment.created_at) }}</li>
+            {% endfor %}
+            {% else %}
+        </ul>
+        <p>{{ __('no_comments') }}</p>
+        {% endif %}
+    </div>
 
 {% endblock %}

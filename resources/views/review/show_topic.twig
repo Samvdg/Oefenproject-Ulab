@@ -18,13 +18,13 @@
             {% if edit == true %}
                 <form action="{{ app.request.uri|trim('/edit', 'right') }}/update" method="post">
                     <input id="name" value="{{ topic.name }}" name="name" class="input-field" />
-                    {{ macros.csrf() }}
+                    {{ csrf_field() }}
                     <button type="submit" value="submit">update</button>
                 </form>
                 <div class="actions">
                     <form action="{{  app.request.uri|trim('/edit', 'right') }}" method="get"><button type="submit" value="submit">show</button> </form>
                     <form action="{{ app.request.uri|trim('/edit', 'right') }}" method="post">
-                        {{ macros.csrf() }}
+                        {{ csrf_field() }}
                         <button type="submit" value="submit">delete</button>
                     </form>
                     <form action="{{  app.request.uri|trim('/edit', 'right') }}/back" method="get"><button type="submit" value="submit">back</button></form>
@@ -35,7 +35,7 @@
                 <div class="actions">
                     <form action="{{  app.request.uri }}/edit" method="get"><button type="submit" value="submit">edit</button></form>
                     <form action="{{ app.request.uri }}" method="post">
-                        {{ macros.csrf() }}
+                        {{ csrf_field() }}
                         <button type="submit" value="submit">delete</button>
                     </form>
                     <form action="{{  app.request.uri }}/back" method="get"><button type="submit" value="submit">back</button></form>

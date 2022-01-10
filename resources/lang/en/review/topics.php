@@ -12,5 +12,6 @@ return [
     */
 
     'name' => 'Name',
+    'unauthenticated' => 'You are not authenticated',
 
 ];

@@ -38,12 +38,17 @@
 
 {% block body %}
     <div class="form_container">
+    {% if auth_check() %}
         <form class="form" action="" method="post">
-            {{ mac.csrf() }}
-            {{ mac.input("name", old("name"), "text", "input-field") }}
+            {{ csrf_field() }}
+            {{ macros.input("name", old("name"), "text", "input-field") }}
             <button id="submit" value="submit" type="submit">submit</button>
         </form>
+    {% else %}
+        <p>{{ __('unauthenticated') }}</p>
+    {% endif %}
     </div>
+
 
     {% if errors.any %}
         <hr style="height:2px;border-width:0;color:red;background-color:red">
@@ -67,7 +72,7 @@
                         <form action="{{ app.request.uri }}/{{ topic.id }}" method="get"><button type="submit" value="submit">show</button> </form>
                         <form action="{{ app.request.uri }}/{{ topic.id }}/edit" method="get"><button type="submit" value="submit">edit</button></form>
                         <form action="{{ app.request.uri }}/{{ topic.id }}" method="post">
-                            {{ macros.csrf() }}
+                            {{ csrf_field() }}
                             <button type="submit" value="submit">delete</button>
                         </form>
                     </div>

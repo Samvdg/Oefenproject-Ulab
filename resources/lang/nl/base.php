@@ -11,11 +11,9 @@ return [
     |
     */
 
-    'name' => 'Naam',
-    'email' => 'Email',
-    'username' => 'Gebruikersnaam',
-    'password' => 'Wachtwoord',
-    'password_confirmation' => 'Wachtwoord bevestiging',
+    'profile' => 'Profiel',
     'register' => 'Registreer',
     'login' => 'Log in',
+    'topics' => 'Onderwerpen',
+    'comments' => 'Reacties',
 ];

@@ -30,7 +30,7 @@
 {% block body %}
     <form action="" method="post">
         <div class="form">
-            {{ macros.csrf() }}
+            {{ csrf_field() }}
             {{ macros.input("name", old("name")) }}
             {{ macros.input("username", old("username")) }}
             {{ macros.input("email", old("email")) }}
