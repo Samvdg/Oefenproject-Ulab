@@ -6,3 +6,7 @@
 {% macro date(date) %}
     {{ date.isoFormat("dddd D MMMM YYYY") }}
 {% endmacro %}
+
+{% macro csrf() %}
+    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+{% enmacro %}

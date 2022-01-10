@@ -1,5 +1,5 @@
 {% extends "base" %}
-{% import "macros" as mac %}
+{% import "macros" %}
 
 {% block styles %}
     <style>
@@ -18,30 +18,31 @@
             {% if edit == true %}
                 <form action="{{ app.request.uri|trim('/edit', 'right') }}/update" method="post">
                     <input id="name" value="{{ topic.name }}" name="name" class="input-field" />
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    {{ macros.csrf() }}
                     <button type="submit" value="submit">update</button>
                 </form>
                 <div class="actions">
                     <form action="{{  app.request.uri|trim('/edit', 'right') }}" method="get"><button type="submit" value="submit">show</button> </form>
                     <form action="{{ app.request.uri|trim('/edit', 'right') }}" method="post">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        {{ macros.csrf() }}
                         <button type="submit" value="submit">delete</button>
                     </form>
                     <form action="{{  app.request.uri|trim('/edit', 'right') }}/back" method="get"><button type="submit" value="submit">back</button></form>
                 </div>
+                <form action="{{ replace(app.request.uri, '(/topics/./edit)') }}/comments?topic_id={{ topic.id }}" method="get"><button type="submit" value="submit">Place a comment</button></form>
             {% else %}
                 <input id="name" value="{{ topic.name }}" name="name" class="input-field"  disabled />
                 <div class="actions">
                     <form action="{{  app.request.uri }}/edit" method="get"><button type="submit" value="submit">edit</button></form>
                     <form action="{{ app.request.uri }}" method="post">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        {{ macros.csrf() }}
                         <button type="submit" value="submit">delete</button>
                     </form>
                     <form action="{{  app.request.uri }}/back" method="get"><button type="submit" value="submit">back</button></form>
                 </div>
+                <form action="{{ replace(app.request.uri, '(/topics/.)') }}/comments/?topic_id={{ topic.id }}" method="get"><button type="submit" value="submit">Place a comment</button></form>
             {% endif %}
 
-            <form action="{{ replace(app.request.uri, '(/topics/.)') }}/comments/?topic={{ topic.id }}"><button type="submit" value="submit">Place a comment</button></form>
 
         </div>
     {% else %}

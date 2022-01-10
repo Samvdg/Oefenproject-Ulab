@@ -1,5 +1,5 @@
 {% extends "base" %}
-{% import "macros" as mac %}
+{% import "macros" %}
 
 
 {% block styles %}
@@ -39,7 +39,7 @@
 {% block body %}
     <div class="form_container">
         <form class="form" action="" method="post">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            {{ mac.csrf() }}
             {{ mac.input("name", old("name"), "text", "input-field") }}
             <button id="submit" value="submit" type="submit">submit</button>
         </form>
@@ -67,7 +67,7 @@
                         <form action="{{ app.request.uri }}/{{ topic.id }}" method="get"><button type="submit" value="submit">show</button> </form>
                         <form action="{{ app.request.uri }}/{{ topic.id }}/edit" method="get"><button type="submit" value="submit">edit</button></form>
                         <form action="{{ app.request.uri }}/{{ topic.id }}" method="post">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                            {{ macros.csrf() }}
                             <button type="submit" value="submit">delete</button>
                         </form>
                     </div>

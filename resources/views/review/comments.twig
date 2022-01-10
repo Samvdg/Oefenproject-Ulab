@@ -23,7 +23,7 @@
         <div class="big_container">
             <div class="banner">
                 <a href="/review/topics"><button>Terug naar topic overzicht</button></a>
-                <h2>{{ __("banner_title") }} over {{ topic.name }}</h2>
+                <h2>{{ __("banner_title") }} over "{{ topic.name }}"</h2>
                 <span>{{ __("banner_description") }}</span>
                 <button style="display:block">{{ __("banner_button") }}</button>
 
@@ -37,7 +37,7 @@
             <div class="form">
                 <form action="" method="post">
                     <div class="form-fields" style="display:flex; justify-content:center; flex-direction:column; align-items: flex-start; background-color: rgba(57,56,56,0.2);">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                        {{ macro.csrf() }}
 
                         {{ macro.input( "name", old("name"), "text", "input-field") }}
                         {{ macro.input( "email", old("email"), "text", "input-field") }}
