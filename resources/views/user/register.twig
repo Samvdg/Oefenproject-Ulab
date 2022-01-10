@@ -1,12 +1,13 @@
-{% extends 'base' %}
-{% import 'macros' %}
+{% extends "base" %}
+{% import "macros" as macros %}
 
 {% block body %}
 <form action="" method="post">
-    {{ macros.input('name', old('name')) }}
-    {{ macros.input('username', old('username')) }}
-    {{ macros.input('email', old('email')) }}
-    {{ macros.input('password', old('password')) }}
-    {{ macros.input('password_confirm', old('password_confirm')) }}
+    {{ macros.csrf() }}
+    {{ macros.input("name", old("name")) }}
+    {{ macros.input("username", old("username")) }}
+    {{ macros.input("email", old("email")) }}
+    {{ macros.input("password", old("password")) }}
+    {{ macros.input("password_confirm", old("password_confirm")) }}
 </form>
 {% endblock %}
