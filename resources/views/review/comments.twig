@@ -38,9 +38,7 @@
                 <form action="" method="post">
                     <div class="form-fields" style="display:flex; justify-content:center; flex-direction:column; align-items: flex-start; background-color: rgba(57,56,56,0.2);">
                         {{ csrf_field() }}
-
-                        {{ macros.input( "name", old("name"), "text", "input-field") }}
-                        {{ macros.input( "email", old("email"), "text", "input-field") }}
+                        {{ macros.user_inp() }}
                         {{ macros.input( "title", old("title"), "text", "input-field") }}
                         {{ macros.input( "description", old("description"), "text", "input-field") }}
 

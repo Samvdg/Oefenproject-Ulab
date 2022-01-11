@@ -15,8 +15,6 @@ class CreateCommentsTable extends Migration
     {
         Schema::create('review.comments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email');
             $table->string('title');
             $table->string('description');
             $table->integer('vote');
