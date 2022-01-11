@@ -2,6 +2,7 @@
 
 namespace App\Models\review;
 
+use App\Models\user\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -36,5 +37,10 @@ class Topics extends Model
     public function comments()
     {
         return $this->hasMany(Comments::class, 'topic_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

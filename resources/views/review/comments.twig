@@ -13,7 +13,8 @@
 
         button {
             border: 1px groove black; border-radius: 5px;
-            background-color: red;
+            background-color: #333;
+            color: white;
         }
 
     </style>
@@ -22,18 +23,19 @@
     <div class="relative flex items-top justify-center">
         <div class="big_container">
             <div class="banner">
-                <a href="/review/topics"><button>Terug naar topic overzicht</button></a>
-                <h2>{{ __("banner_title") }} over "{{ topic.name }}"</h2>
+                <a href="/review/topics"><button>{{ __('go_back') }}</button></a>
+                <h2>{{ __("banner_title") }} "{{ topic.name }}"</h2>
                 <span>{{ __("banner_description") }}</span>
-                <button style="display:block">{{ __("banner_button") }}</button>
 
                 <div class="comment_stats" style="display:flex; justify-content: space-between">
                     <p>{{ __("comment_count") }}{{ comments.total }} </p>
-                    <p>{{ __("last_comment") }}{{ date(comments.last.created_at) }}</p>
+                    <p>{{ __("created_by") }}{{ comments.total }} </p>
+                    <p>{% if comments.total > 0 %}{{ __("last_comment") }}{{ date(comments.last.created_at) }}{% else %}{{ __('no_last_date') }} {% endif %}</p>
                 </div>
                 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
             </div>
 
+            {% if auth_check() %}
             <div class="form">
                 <form action="" method="post">
                     <div class="form-fields" style="display:flex; justify-content:center; flex-direction:column; align-items: flex-start; background-color: rgba(57,56,56,0.2);">
@@ -44,11 +46,13 @@
 
                         <label for="vote">{{ __('vote') }}</label>
                         <input class="input-field" id="vote" name="vote" type="range" min="0" max="5" required value="{{ old("vote") }}">
-{#                        <input type="hidden" name="topic_id" value="{{ topic.id }}" />#}
+                        <input type="hidden" name="topic_id" value="{{ topic.id }}" />
                     </div>
 
                     <button id="submit" name="submit" type="submit" value="submit">{{ __("submit_comment") }}</button>
                 </form>
+            </div>
+            {% endif %}
 
                 {% if errors.any %}
                     <hr style="height:2px;border-width:0;color:red;background-color:red">
@@ -86,7 +90,6 @@
                 {% else %}
                     <p>{{ __('no_comments') }}</p>
                 {% endif %}
-            </div>
         </div>
     </div>
 {% endblock %}

@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'banner_title' => "Plaats hier een reactie",
+    'banner_title' => "Plaats hier een reactie over ",
     'banner_description' => 'Laat hier een berichtje achter. Onnodig kwetsende berichten of woorden zullen door de reactie verwijderd worden.',
     'banner_button' => 'Plaats een reactie',
     'comment_count' => 'Aantal reacties: ',
@@ -23,4 +23,6 @@ return [
     'vote' => 'Stem',
     'submit_comment' => 'Stuur reactie',
     'no_comments' => 'Er zijn nog geen reacties.',
+    'no_last_date' => 'Er is geen laatste reactie geplaatst',
+    'go_back' => 'Ga terug naar het onderwerpen overzicht',
 ];
