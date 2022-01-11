@@ -37,7 +37,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="form_container">
+    <div class="form_container relative flex items-top justify-center">
     {% if auth_check() %}
         <form class="form" action="" method="post">
             {{ csrf_field() }}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\review;
 
 use App\Models\review\Comments;
 use App\Models\review\Topics;
+use App\Models\user\User;
 use Illuminate\Http\Request;
 use function back;
 use function view;
@@ -15,7 +16,7 @@ class CommentsController
      */
     public function index() {
 
-        $topic = Topics::findOrFail(request("topic_id"), ['id', 'name']);
+        $topic = Topics::findOrFail(request("topic_id"), ['id', 'name', 'user_id', 'created_at']);
         $comments = Comments::where('topic_id', $topic->id)->paginate(3);
         return view("review.comments" ,[
             "comments" => $comments,
@@ -34,8 +35,6 @@ class CommentsController
     {
 
         $validatedData = $request->validate([
-            "name" => "required|min:5|max:100",
-            "email" => "required|email|max:100",
             "title" => "required|max:100|min:5",
             "description" => "required|min:1|max:100",
             "vote" => "required|integer|min:1|max:5",

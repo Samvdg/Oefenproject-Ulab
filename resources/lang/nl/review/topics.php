@@ -24,6 +24,6 @@ return [
     'vote' => 'Stem',
     'submit_comment' => 'Stuur reactie',
     'no_comments' => 'Er zijn nog geen reacties.',
-    'unauthenticated' => 'U bent niet ingelogd',
+    'unauthenticated' => 'U bent niet ingelogd. Log in om een onderwerp aan te maken.',
 
 ];

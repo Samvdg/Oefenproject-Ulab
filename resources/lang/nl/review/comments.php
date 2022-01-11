@@ -25,4 +25,6 @@ return [
     'no_comments' => 'Er zijn nog geen reacties.',
     'no_last_date' => 'Er is geen laatste reactie geplaatst',
     'go_back' => 'Ga terug naar het onderwerpen overzicht',
+    'created_by' => 'Gemaakt door: ',
+    'unauthenticated' => 'U bent niet ingelogd. Log in om een reactie te plaatsen.',
 ];

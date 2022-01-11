@@ -17,9 +17,16 @@
             color: white;
         }
 
+        .comment_header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
     </style>
 {% endblock %}
 {% block body %}
+{#  TODO: clean up css  #}
     <div class="relative flex items-top justify-center">
         <div class="big_container">
             <div class="banner">
@@ -29,67 +36,78 @@
 
                 <div class="comment_stats" style="display:flex; justify-content: space-between">
                     <p>{{ __("comment_count") }}{{ comments.total }} </p>
-                    <p>{{ __("created_by") }}{{ comments.total }} </p>
-                    <p>{% if comments.total > 0 %}{{ __("last_comment") }}{{ date(comments.last.created_at) }}{% else %}{{ __('no_last_date') }} {% endif %}</p>
+                    <p>{{ __("created_by") }}{{ topic.user.username }} </p>
+                    <p>{% if comments.total > 0 %} {{ __("last_comment") }}{{ date(comments.last.created_at) }} {% else %} {{ __('no_last_date') }} {% endif %}</p>
                 </div>
                 <hr style="height:2px;border-width:0;color:gray;background-color:gray">
             </div>
 
             {% if auth_check() %}
-            <div class="form">
-                <form action="" method="post">
-                    <div class="form-fields" style="display:flex; justify-content:center; flex-direction:column; align-items: flex-start; background-color: rgba(57,56,56,0.2);">
-                        {{ csrf_field() }}
-                        {{ macros.user_inp() }}
-                        {{ macros.input( "title", old("title"), "text", "input-field") }}
-                        {{ macros.input( "description", old("description"), "text", "input-field") }}
+                <div class="form">
+                    <form action="" method="post">
+                        <div class="form-fields" style="display:flex; justify-content:center; flex-direction:column; align-items: flex-start; background-color: rgba(57,56,56,0.2);">
+                            {{ csrf_field() }}
+                            {{ macros.user_inp() }}
+                            {{ macros.input( "title", old("title"), "text", "input-field") }}
+                            {{ macros.input( "description", old("description"), "text", "input-field") }}
 
-                        <label for="vote">{{ __('vote') }}</label>
-                        <input class="input-field" id="vote" name="vote" type="range" min="0" max="5" required value="{{ old("vote") }}">
-                        <input type="hidden" name="topic_id" value="{{ topic.id }}" />
-                    </div>
+                            <label for="vote">{{ __('vote') }}</label>
+                            <input class="input-field" id="vote" name="vote" type="range" min="0" max="5" required value="{{ old("vote") }}">
+                            <input type="hidden" name="topic_id" value="{{ topic.id }}" />
+                        </div>
 
-                    <button id="submit" name="submit" type="submit" value="submit">{{ __("submit_comment") }}</button>
-                </form>
-            </div>
+                        <button id="submit" name="submit" type="submit" value="submit">{{ __("submit_comment") }}</button>
+                    </form>
+                </div>
+            {% else %}
+                <p>{{ __('unauthenticated') }}</p>
             {% endif %}
 
-                {% if errors.any %}
-                    <hr style="height:2px;border-width:0;color:red;background-color:red">
-                    <div class="alert alert-danger">
-                        <h3 style="color:red">Errors:</h3>
-                        <ul>
-                            {% for error in errors.all %}
-                                <li>{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endif %}
-
-                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-
-
-                {% if comments.total > 0 %}
-                    <div class="comments">
-                        {% for comment in comments %}
-                            <div class="comment">
-                                <h3 style="color:red">{{ comment.title }}</h3>
-                                <p>{{ comment.description }}</p>
-                                <div style="display:flex;justify-content:space-between">
-                                    <span >{{ __('vote') }} {{ comment.vote }}/5</span>
-                                    {# TODO: make a show and edit button #}
-                                    <span style="font-weight:bold">{{ comment.name }} | {{ comment.created_at.isoFormat("dddd D MMMM YYYY") }}</span>
-                                </div>
-                                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-                            </div>
+            {% if errors.any %}
+                <hr style="height:2px;border-width:0;color:red;background-color:red">
+                <div class="alert alert-danger">
+                    <h3 style="color:red">Errors:</h3>
+                    <ul>
+                        {% for error in errors.all %}
+                            <li>{{ error }}</li>
                         {% endfor %}
-                        <div class="d-flex justify-content-center">
-                            {{  comments.links }}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+
+
+            {% if comments.total > 0 %}
+                <div class="comments">
+                    {% for comment in comments %}
+                        <div class="comment">
+                            <div class="comment_header">
+                                <div class="comment_text_section">
+                                    <h3 style="color:red">{{ comment.title }}</h3>
+                                    <p>{{ comment.description }}</p>
+                                </div>
+                                <div class="comment_buttons">
+                                    {% if auth_user().id == comment.user.id %}
+                                        <form action="/review/comments/{{ comment.id }}/edit" method="get"><button type="submit" value="submit">edit</button></form>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div style="display:flex;justify-content:space-between">
+                                <span >{{ __('vote') }} {{ comment.vote }}/5</span>
+                                <span>{{ __('created_by') }}{{ comment.user.username }}</span>
+                                <span style="font-weight:bold">{{ date(comment.created_at) }}</span>
+                            </div>
+                            <hr style="height:2px;border-width:0;color:gray;background-color:gray">
                         </div>
+                    {% endfor %}
+                    <div class="d-flex justify-content-center">
+                        {{  comments.links }}
                     </div>
-                {% else %}
-                    <p>{{ __('no_comments') }}</p>
-                {% endif %}
+                </div>
+            {% else %}
+                <p>{{ __('no_comments') }}</p>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
