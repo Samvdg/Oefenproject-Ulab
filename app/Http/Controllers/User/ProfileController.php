@@ -15,8 +15,8 @@ class ProfileController
         if(Auth::check()){
             return view('user.profile', [
                 'user' => Auth::user(),
-                'comments' => Comments::where('user_id', Auth::id())->paginate(3),
                 'topics' => Topics::where('user_id', Auth::id())->paginate(3),
+                'comments' => Comments::where('user_id', Auth::id())->paginate(3),
             ]);
         } else {
             return redirect('/user/login');

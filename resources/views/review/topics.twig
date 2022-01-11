@@ -42,6 +42,7 @@
         <form class="form" action="" method="post">
             {{ csrf_field() }}
             {{ macros.input("name", old("name"), "text", "input-field") }}
+            {{ macros.user_inp() }}
             <button id="submit" value="submit" type="submit">submit</button>
         </form>
     {% else %}

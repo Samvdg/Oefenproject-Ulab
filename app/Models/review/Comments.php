@@ -23,6 +23,7 @@ class Comments extends Model
         'description',
         'vote',
         'topic_id',
+        'user_id',
     ];
 
     /**

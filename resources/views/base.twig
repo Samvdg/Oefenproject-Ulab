@@ -58,6 +58,7 @@
         <li class="nav-list-item"><a href="/review/topics">Topics</a></li>
         {% if auth_check() %}
             <li class="nav-list-item" style="float:right"><a class="" href="/user/profile">{{ ___('profile') }}</a></li>
+            <li class="nav-list-item" style="float:right"><a class="" href="/user/login/{{ auth_user().id }}/logout">{{ ___('logout') }}</a></li>
         {% else %}
             <li class="nav-list-item" style="float:right"><a class="" href="/user/login">Login</a></li>
             <li class="nav-list-item" style="float:right"><a class="" href="/user/register">Register</a></li>

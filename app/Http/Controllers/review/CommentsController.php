@@ -39,6 +39,7 @@ class CommentsController
             "title" => "required|max:100|min:5",
             "description" => "required|min:1|max:100",
             "vote" => "required|integer|min:1|max:5",
+            "user_id" => "required|integer",
             "topic_id" => "required|integer",
         ]);
 

@@ -30,9 +30,8 @@
         <h3>{{ __('topics_info') }}</h3>
         <ul class="info-list topics">
             {% if topics.total > 0 %}
-            {% for comment in topics %}
-                <li>{{ topic.name }}</li>
-                <li>{{ __('placed_at') }} {{ macros.date(topic.created_at) }}</li>
+            {% for topic in topics %}
+                <li><a href="/review/topics/{{ topic.id }}">'{{ topic.name }}' || {{ __('placed_at') }} {{ macros.date(topic.created_at) }}</a></li>
             {% endfor %}
             {% else %}
         </ul>
@@ -45,9 +44,7 @@
         <ul class="info-list comments">
             {% if comments.total > 0 %}
             {% for comment in comments %}
-                <li>{{ comment.title }}</li>
-                <li>{{ comment.topic_id }}</li>
-                <li>{{ __('placed_at') }} {{ macros.date(comment.created_at) }}</li>
+                <a><a href="/review/comments">{{ comment.id }}"{{ comment.title }} || {{ __('placed_at') }} {{ macros.date(comment.created_at) }} </a></li>
             {% endfor %}
             {% else %}
         </ul>

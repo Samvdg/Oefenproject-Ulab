@@ -2,6 +2,8 @@
 
 namespace App\Models\user;
 
+use App\Models\review\Comments;
+use App\Models\review\Topics;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -50,5 +52,15 @@ class User extends Authenticatable
         static::creating(function ($user) {
             $user->password = Hash::make($user->password);
         });
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comments::class, 'user_id');
+    }
+
+    public function topics()
+    {
+        return $this->hasMany(Topics::class, 'user_id');
     }
 }

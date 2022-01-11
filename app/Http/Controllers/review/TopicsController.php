@@ -26,6 +26,7 @@ class TopicsController
     {
         $validatedData = $request->validate([
             "name" => "required",
+            "user_id" => "required|integer",
         ]);
 
         $topic = new Topics();
@@ -60,6 +61,9 @@ class TopicsController
 
     /**
      * Update the specified resource in storage.
+     *
+     * TODO: add user_id to Topics here and in database
+     * TODO: add user_id to comments in forms and database
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id

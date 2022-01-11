@@ -14,6 +14,7 @@ return [
     'profile' => 'Profiel',
     'register' => 'Registreer',
     'login' => 'Log in',
+    'logout' => 'Log uit',
     'topics' => 'Onderwerpen',
     'comments' => 'Reacties',
 ];
